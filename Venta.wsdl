@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.example.org/Venta/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Venta" targetNamespace="http://www.example.org/Venta/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.example.org/Venta/">
+      <xsd:element name="Insertar">
+        <xsd:complexType>
+          <xsd:sequence>
+          	<xsd:element name="productos" type="tns:Producto"
+          		minOccurs="1" maxOccurs="unbounded" />
+          	<xsd:element name="precioTotal" type="xsd:float"></xsd:element>
+          	<xsd:element name="pagado" type="xsd:boolean"></xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="InsertarResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="id" type="xsd:int"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Validar">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element name="productos" type="tns:Producto"
+      				minOccurs="1" maxOccurs="unbounded">
+      			</xsd:element>
+      			<xsd:element name="precioTotal" type="xsd:float"></xsd:element>
+      			<xsd:element name="pagado" type="xsd:string"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ValidarResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element name="validado" type="xsd:boolean"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+    
+      <xsd:complexType name="Producto">
+      	<xsd:sequence>
+      		<xsd:element name="id" type="xsd:int"></xsd:element>
+      		<xsd:element name="nombre" type="xsd:string"></xsd:element>
+      		<xsd:element name="cantidad" type="xsd:int"></xsd:element>
+      		<xsd:element name="precio" type="xsd:float"></xsd:element>
+      	</xsd:sequence>
+      </xsd:complexType>
+    
+      <xsd:complexType name="Factura">
+      	<xsd:sequence>
+      		<xsd:element name="productos" type="tns:Producto"
+      			minOccurs="1" maxOccurs="unbounded">
+      		</xsd:element>
+      		<xsd:element name="id" type="xsd:int"></xsd:element>
+      		<xsd:element name="precioTotal" type="xsd:float"></xsd:element>
+      	</xsd:sequence>
+      </xsd:complexType>
+    
+      <xsd:complexType name="Oferta">
+      	<xsd:sequence>
+      		<xsd:element name="productos" type="tns:Producto" minOccurs="1" maxOccurs="unbounded"></xsd:element>
+      		<xsd:element name="id" type="xsd:int"></xsd:element>
+      		<xsd:element name="fecha" type="xsd:date"></xsd:element>
+      	</xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="InsertarRequest">
+    <wsdl:part element="tns:Insertar" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="InsertarResponse">
+    <wsdl:part element="tns:InsertarResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="ValidarRequest">
+  	<wsdl:part name="parameters" element="tns:Validar"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ValidarResponse">
+  	<wsdl:part name="parameters" element="tns:ValidarResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="Venta">
+    <wsdl:operation name="Insertar">
+      <wsdl:input message="tns:InsertarRequest"/>
+      <wsdl:output message="tns:InsertarResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="Validar">
+    	<wsdl:input message="tns:ValidarRequest"></wsdl:input>
+    	<wsdl:output message="tns:ValidarResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="VentaSOAP" type="tns:Venta">
+
+  	<soap:binding style="document"
+  		transport="http://schemas.xmlsoap.org/soap/http" />
+  	<wsdl:operation name="Insertar">
+
+  		<soap:operation
+  			soapAction="http://www.example.org/Venta/Insertar" />
+  		<wsdl:input>
+
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="Validar">
+  		<soap:operation
+  			soapAction="http://www.example.org/Venta/Validar" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Venta">
+    <wsdl:port binding="tns:VentaSOAP" name="VentaSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

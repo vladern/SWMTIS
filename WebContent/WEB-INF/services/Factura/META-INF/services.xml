@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- This file was auto-generated from WSDL --><!-- by the Apache Axis2 version: 1.6.3  Built on : Jun 27, 2015 (11:17:49 BST) --><serviceGroup>
+    <service name="Factura">
+        <messageReceivers>
+            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-out" class="org.example.www.factura.FacturaMessageReceiverInOut"/>
+        </messageReceivers>
+        <parameter name="ServiceClass">org.example.www.factura.FacturaSkeleton</parameter>
+        <parameter name="useOriginalwsdl">true</parameter>
+        <parameter name="modifyUserWSDLPortAddress">true</parameter>
+        <operation name="Generar" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.example.org/Factura/">
+            <actionMapping>http://www.example.org/Factura/Generar</actionMapping>
+            <outputActionMapping>http://www.example.org/Factura/Factura/GenerarResponse</outputActionMapping>
+        </operation>
+        <operation name="Obtener" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.example.org/Factura/">
+            <actionMapping>http://www.example.org/Factura/Obtener</actionMapping>
+            <outputActionMapping>http://www.example.org/Factura/Factura/ObtenerResponse</outputActionMapping>
+        </operation>
+        <operation name="Validar" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.example.org/Factura/">
+            <actionMapping>http://www.example.org/Factura/Validar</actionMapping>
+            <outputActionMapping>http://www.example.org/Factura/Factura/ValidarResponse</outputActionMapping>
+        </operation>
+    </service>
+</serviceGroup>

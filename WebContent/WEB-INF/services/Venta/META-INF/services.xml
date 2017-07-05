@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- This file was auto-generated from WSDL --><!-- by the Apache Axis2 version: 1.6.3  Built on : Jun 27, 2015 (11:17:49 BST) --><serviceGroup>
+    <service name="Venta">
+        <messageReceivers>
+            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-out" class="org.example.www.venta.VentaMessageReceiverInOut"/>
+        </messageReceivers>
+        <parameter name="ServiceClass">org.example.www.venta.VentaSkeleton</parameter>
+        <parameter name="useOriginalwsdl">true</parameter>
+        <parameter name="modifyUserWSDLPortAddress">true</parameter>
+        <operation name="Validar" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.example.org/Venta/">
+            <actionMapping>http://www.example.org/Venta/Validar</actionMapping>
+            <outputActionMapping>http://www.example.org/Venta/Venta/ValidarResponse</outputActionMapping>
+        </operation>
+        <operation name="Insertar" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.example.org/Venta/">
+            <actionMapping>http://www.example.org/Venta/Insertar</actionMapping>
+            <outputActionMapping>http://www.example.org/Venta/Venta/InsertarResponse</outputActionMapping>
+        </operation>
+    </service>
+</serviceGroup>

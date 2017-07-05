@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.example.org/Tercero/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Tercero" targetNamespace="http://www.example.org/Tercero/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.example.org/Tercero/">
+      <xsd:element name="Validar">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="cif" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ValidarResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="validado" type="xsd:boolean"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ValidarRequest">
+    <wsdl:part element="tns:Validar" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="ValidarResponse">
+    <wsdl:part element="tns:ValidarResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="Tercero">
+    <wsdl:operation name="Validar">
+      <wsdl:input message="tns:ValidarRequest"/>
+      <wsdl:output message="tns:ValidarResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TerceroSOAP" type="tns:Tercero">
+
+  	<soap:binding style="document"
+  		transport="http://schemas.xmlsoap.org/soap/http" />
+  	<wsdl:operation name="Validar">
+
+  		<soap:operation
+  			soapAction="http://www.example.org/Tercero/Validar" />
+  		<wsdl:input>
+
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Tercero">
+    <wsdl:port binding="tns:TerceroSOAP" name="TerceroSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

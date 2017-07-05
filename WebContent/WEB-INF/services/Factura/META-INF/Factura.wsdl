@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="Factura" targetNamespace="http://www.example.org/Factura/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.example.org/Factura/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.example.org/Factura/">
+      <xsd:element name="Generar">
+        <xsd:complexType>
+          <xsd:sequence>
+          	<xsd:element maxOccurs="unbounded" minOccurs="1" name="productos" type="tns:Producto"/>
+          	<xsd:element name="cliente" type="xsd:string"/>
+          	<xsd:element name="precioTotal" type="xsd:float"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GenerarResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="cif" type="xsd:int"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    
+      <xsd:complexType name="Producto">
+      	<xsd:sequence>
+      		<xsd:element name="id" type="xsd:int"/>
+      		<xsd:element name="nombre" type="xsd:string"/>
+      		<xsd:element name="cantidad" type="xsd:int"/>
+      		<xsd:element name="precio" type="xsd:float"/>
+      	</xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Validar">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element maxOccurs="unbounded" minOccurs="1" name="productos" type="tns:Producto">
+      			</xsd:element>
+      			<xsd:element name="cliente" type="xsd:string"/>
+      			<xsd:element name="precioTotal" type="xsd:float"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ValidarResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element name="validada" type="xsd:boolean"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Obtener">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element name="id" type="xsd:int"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ObtenerResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element name="factura" type="tns:Factura"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+    
+      <xsd:complexType name="Factura">
+      	<xsd:sequence>
+      		<xsd:element maxOccurs="unbounded" minOccurs="1" name="productos" type="tns:Producto">
+      		</xsd:element>
+      		<xsd:element name="id" type="xsd:int"/>
+      		<xsd:element name="precioTotal" type="xsd:float"/>
+      	</xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ObtenerRequest">
+    <wsdl:part name="parameters" element="tns:Obtener">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GenerarRequest">
+    <wsdl:part name="parameters" element="tns:Generar">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ObtenerResponse">
+    <wsdl:part name="parameters" element="tns:ObtenerResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ValidarRequest">
+    <wsdl:part name="parameters" element="tns:Validar">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GenerarResponse">
+    <wsdl:part name="parameters" element="tns:GenerarResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ValidarResponse">
+    <wsdl:part name="parameters" element="tns:ValidarResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="Factura">
+    <wsdl:operation name="Generar">
+      <wsdl:input message="tns:GenerarRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GenerarResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Validar">
+      <wsdl:input message="tns:ValidarRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:ValidarResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Obtener">
+      <wsdl:input message="tns:ObtenerRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:ObtenerResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="FacturaSOAP" type="tns:Factura">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="Generar">
+      <soap:operation soapAction="http://www.example.org/Factura/Generar"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Validar">
+      <soap:operation soapAction="http://www.example.org/Factura/Validar"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Obtener">
+      <soap:operation soapAction="http://www.example.org/Factura/Obtener"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Factura">
+    <wsdl:port name="FacturaSOAP" binding="tns:FacturaSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

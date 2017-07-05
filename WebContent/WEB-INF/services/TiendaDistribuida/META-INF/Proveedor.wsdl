@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="Proveedor" targetNamespace="http://www.example.org/Proveedor/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.example.org/Proveedor/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.example.org/Proveedor/">
+      <xsd:element name="Comprobar">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="cif" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ComprobarResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="comprobado" type="xsd:boolean"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="GenerarPresupuesto">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element maxOccurs="unbounded" minOccurs="1" name="productos" type="tns:Producto"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GenerarPresupuestoResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element name="presupuesto" type="xsd:float"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+    
+      <xsd:complexType name="Producto">
+      	<xsd:sequence>
+      		<xsd:element name="id" type="xsd:int"/>
+      		<xsd:element name="nombre" type="xsd:string"/>
+      		<xsd:element name="cantidad" type="xsd:int"/>
+      		<xsd:element name="precio" type="xsd:float"/>
+      	</xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ComprobarRequest">
+    <wsdl:part name="parameters" element="tns:Comprobar">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GenerarPresupuestoRequest">
+    <wsdl:part name="parameters" element="tns:GenerarPresupuesto">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GenerarPresupuestoResponse">
+    <wsdl:part name="parameters" element="tns:GenerarPresupuestoResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ComprobarResponse">
+    <wsdl:part name="parameters" element="tns:ComprobarResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="Proveedor">
+    <wsdl:operation name="Comprobar">
+      <wsdl:input message="tns:ComprobarRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:ComprobarResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerarPresupuesto">
+      <wsdl:input message="tns:GenerarPresupuestoRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GenerarPresupuestoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ProveedorSOAP" type="tns:Proveedor">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="Comprobar">
+      <soap:operation soapAction="http://www.example.org/Proveedor/Comprobar"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerarPresupuesto">
+      <soap:operation soapAction="http://www.example.org/Proveedor/GenerarPresupuesto"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Proveedor">
+    <wsdl:port name="ProveedorSOAP" binding="tns:ProveedorSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="TiendaDistribuida" targetNamespace="http://www.example.org/TiendaDistribuida/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.example.org/TiendaDistribuida/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.example.org/TiendaDistribuida/">
+      <xsd:element name="Validar">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="cif" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ValidarResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="validada" type="xsd:boolean"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ValidarRequest">
+    <wsdl:part name="parameters" element="tns:Validar">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ValidarResponse">
+    <wsdl:part name="parameters" element="tns:ValidarResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="TiendaDistribuida">
+    <wsdl:operation name="Validar">
+      <wsdl:input message="tns:ValidarRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:ValidarResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TiendaDistribuidaSOAP" type="tns:TiendaDistribuida">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="Validar">
+      <soap:operation soapAction="http://www.example.org/TiendaDistribuida/Validar"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TiendaDistribuida">
+    <wsdl:port name="TiendaDistribuidaSOAP" binding="tns:TiendaDistribuidaSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

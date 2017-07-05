@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="InformeError" targetNamespace="http://www.example.org/InformeError/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.example.org/InformeError/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.example.org/InformeError/">
+      <xsd:element name="Generar">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="id" type="xsd:int"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GenerarResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="informeError" type="tns:InformeError"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Enviar">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element name="informeError" type="tns:InformeError">
+      			</xsd:element>
+      			<xsd:element name="destino" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="EnviarResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+
+      			<xsd:element name="enviado" type="xsd:boolean"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+    
+      <xsd:complexType name="InformeError">
+      	<xsd:sequence>
+      		<xsd:element name="id" type="xsd:int"/>
+      		<xsd:element name="nombre" type="xsd:string"/>
+
+      		<xsd:element name="descripcion" type="xsd:string"/>
+      	</xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="GenerarRequest">
+    <wsdl:part name="parameters" element="tns:Generar">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GenerarResponse">
+    <wsdl:part name="parameters" element="tns:GenerarResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="EnviarRequest">
+    <wsdl:part name="parameters" element="tns:Enviar">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="EnviarResponse">
+    <wsdl:part name="parameters" element="tns:EnviarResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="InformeError">
+    <wsdl:operation name="Generar">
+      <wsdl:input message="tns:GenerarRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GenerarResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Enviar">
+      <wsdl:input message="tns:EnviarRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:EnviarResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="InformeErrorSOAP" type="tns:InformeError">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="Generar">
+      <soap:operation soapAction="http://www.example.org/InformeError/Generar"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Enviar">
+      <soap:operation soapAction="http://www.example.org/InformeError/Enviar"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="InformeError">
+    <wsdl:port name="InformeErrorSOAP" binding="tns:InformeErrorSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

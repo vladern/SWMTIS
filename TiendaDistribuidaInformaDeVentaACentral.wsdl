@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.example.org/TiendaDistribuidaInformaDeVentaACentral/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="TiendaDistribuidaInformaDeVentaACentral" targetNamespace="http://www.example.org/TiendaDistribuidaInformaDeVentaACentral/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.example.org/TiendaDistribuidaInformaDeVentaACentral/">
+      <xsd:element name="CentralRegistraDatosVenta">
+        <xsd:complexType>
+          <xsd:sequence>
+          	<xsd:element name="venta" type="tns:Venta" />
+          	<xsd:element name="tiendaDistribuida" type="xsd:string"></xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CentralRegistraDatosVentaResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="registrado" type="xsd:boolean"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    
+      <xsd:complexType name="Producto">
+      	<xsd:sequence>
+      		<xsd:element name="id" type="xsd:int"></xsd:element>
+      		<xsd:element name="nombre" type="xsd:string"></xsd:element>
+      		<xsd:element name="cantidad" type="xsd:int"></xsd:element>
+      		<xsd:element name="precio" type="xsd:float"></xsd:element>
+      	</xsd:sequence>
+      </xsd:complexType>
+    
+      <xsd:complexType name="Venta">
+      	<xsd:sequence>
+      		<xsd:element name="id" type="xsd:int"></xsd:element>
+      		<xsd:element name="productos" type="tns:Producto"
+      			minOccurs="1" maxOccurs="unbounded">
+      		</xsd:element>
+      		<xsd:element name="tiendaDistribuida" type="xsd:string"></xsd:element>
+      	</xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="CentralRegistraDatosVentaRequest">
+    <wsdl:part element="tns:CentralRegistraDatosVenta" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="CentralRegistraDatosVentaResponse">
+    <wsdl:part element="tns:CentralRegistraDatosVentaResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="TiendaDistribuidaInformaDeVentaACentral">
+    <wsdl:operation name="CentralRegistraDatosVenta">
+      <wsdl:input message="tns:CentralRegistraDatosVentaRequest"/>
+      <wsdl:output message="tns:CentralRegistraDatosVentaResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TiendaDistribuidaInformaDeVentaACentralSOAP"
+  	type="tns:TiendaDistribuidaInformaDeVentaACentral">
+
+  	<soap:binding style="document"
+  		transport="http://schemas.xmlsoap.org/soap/http" />
+  	<wsdl:operation name="CentralRegistraDatosVenta">
+
+  		<soap:operation
+  			soapAction="http://www.example.org/TiendaDistribuidaInformaDeVentaACentral/CentralRegistraDatosVenta" />
+  		<wsdl:input>
+
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TiendaDistribuidaInformaDeVentaACentral">
+    <wsdl:port binding="tns:TiendaDistribuidaInformaDeVentaACentralSOAP" name="TiendaDistribuidaInformaDeVentaACentralSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
